@@ -98,8 +98,8 @@ async def start():
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, Var.PORT).start()
-    await idle()
     await restart_bots()
+    await idle()
     print("Bot Started Powered By @VJ_Botz")
 
 # Don't Remove Credit Tg - @VJ_Botz
