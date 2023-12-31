@@ -96,10 +96,11 @@ async def start():
     app = web.AppRunner(await web_server())
     await StreamBot.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
     await app.setup()
-    await restart_bots()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, Var.PORT).start()
     await idle()
+    await restart_bots()
+    print("Bot Started Powered By @VJ_Botz")
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
