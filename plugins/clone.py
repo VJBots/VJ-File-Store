@@ -12,7 +12,7 @@ from config import API_ID, API_HASH, ADMINS, DB_NAME
 from config import DB_URI as MONGO_URL
 
 mongo_client = MongoClient(MONGO_URL)
-mongo_db = mongo_client["cloned_bot"]
+mongo_db = mongo_client["cloned_vjbotz"]
 mongo_collection = mongo_db[DB_NAME]
 
 @Client.on_message((filters.regex(r'\d[0-9]{8,10}:[0-9A-Za-z_-]{35}')) & filters.private)
