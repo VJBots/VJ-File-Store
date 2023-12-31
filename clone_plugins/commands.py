@@ -19,6 +19,7 @@ from config import PICS, CUSTOM_FILE_CAPTION, AUTO_DELETE_TIME, AUTO_DELETE
 import re
 import json
 import base64
+
 logger = logging.getLogger(__name__)
 
 # Don't Remove Credit Tg - @VJ_Botz
@@ -51,7 +52,7 @@ async def start(client, message):
             InlineKeyboardButton('🤖 ᴄʀᴇᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ ᴄʟᴏɴᴇ ʙᴏᴛ', url=f'https://t.me/{BOT_USERNAME}?start=true')
             ],[
             InlineKeyboardButton('💁‍♀️ ʜᴇʟᴘ', callback_data='help'),
-            InlineKeyboardButton('🔒 ᴄʟᴏsᴇ', callback_data='close_data')
+            InlineKeyboardButton('ᴀʙᴏᴜᴛ 🔻', callback_data='about')
         ]]
         me2 = (await client.get_me()).mention
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -179,7 +180,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('🤖 ᴄʀᴇᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ ᴄʟᴏɴᴇ ʙᴏᴛ', url=f'https://t.me/{BOT_USERNAME}?start=true')
             ],[
             InlineKeyboardButton('💁‍♀️ ʜᴇʟᴘ', callback_data='help'),
-            InlineKeyboardButton('🔒 ᴄʟᴏsᴇ', callback_data='close_data')
+            InlineKeyboardButton('ᴀʙᴏᴜᴛ 🔻', callback_data='about')
         ]]
         
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -212,6 +213,26 @@ async def cb_handler(client: Client, query: CallbackQuery):
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
             text=script.CHELP_TXT,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )  
+
+    elif query.data == "about":
+        buttons = [[
+            InlineKeyboardButton('Hᴏᴍᴇ', callback_data='start'),
+            InlineKeyboardButton('🔒 Cʟᴏsᴇ', callback_data='close_data')
+        ]]
+        await client.edit_message_media(
+            query.message.chat.id, 
+            query.message.id, 
+            InputMediaPhoto(random.choice(PICS))
+        )
+        id = client.me.id
+        owner = mongo_db.bots.find_one({'bot_id': id})
+        ownerid = int(owner['user_id'])
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.CABOUT_TXT.format(ownerid),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )  
