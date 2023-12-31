@@ -39,6 +39,7 @@
 - `AUTO_DELETE` : Time In Minutes
 - `AUTO_DELETE_TIME` : Time In Seconds
 - `PYTHON_VERSION` : This Variable Is Only For Render & Koyeb, Value IS `3.10.8`
+- `PORT` : This Variable Is Only For Render & Koyeb, Value IS `8080`
 </b>
 </details>
 
