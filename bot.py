@@ -99,8 +99,8 @@ async def start():
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, Var.PORT).start()
     await restart_bots()
-    await idle()
     print("Bot Started Powered By @VJ_Botz")
+    await idle()
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
