@@ -106,6 +106,6 @@ Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
 </b>
 </details>
 
-<b>
-Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
-</b>
+
+### Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
+
