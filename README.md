@@ -66,7 +66,7 @@
 - `/base_site` : By This Command You Can Set Your Url Shortner Domain [Use Like This /base_site domain.com]
 - `/api` : By This Command You Can Set Your Url Shortner Api [Use Like This /api (your api key)]
 - `/deletecloned` : By This Command You Can Delete Your Cloned Bot [Use Like This /deletecloned (your bot token)]
-- `/broadcast` : By Using This Command You Can Broadcast A Message To Your Bot User, Reply This Command To Broadcast Message [ Owner Only Command]
+- `/broadcast` : By Using This Command You Can Broadcast A Message To Your Bot User, Reply This Command To Broadcast Message [Owner Only Command]
 
 🖍️ Clone Bot Commands :- 
 
@@ -74,8 +74,8 @@
 - `/link` : By This Command You Can Generate A Shareable Link Of File By Replying This Command To That File
 - `/base_site` : By This Command You Can Set Your Url Shortner Domain [Use Like This /base_site domain.com]
 - `/api` : By This Command You Can Set Your Url Shortner Api [Use Like This /api (your api key)]
-- `/broadcast` : By Using This Command You Can Broadcast A Message To Your Bot User, Reply This Command To Broadcast Message [ Clone Bot Owner Only Command ]
-- 
+- `/broadcast` : By Using This Command You Can Broadcast A Message To Your Bot User, Reply This Command To Broadcast Message [Clone Bot Owner Only Command]
+
 </b>
 </details>
 
