@@ -109,5 +109,5 @@ Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
 
 ### Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
 
-<b>Selling This Repo Is Strictly Prohibited 🚫</b>
+<b>Selling This Repo Or Code Of This Repo For Money Is Strictly Prohibited 🚫</b>
 
