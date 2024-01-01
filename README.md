@@ -87,6 +87,8 @@
 
 🖍️ This Code Is Fully Written Or Coded By [Tech VJ](https://telegram.me/Kingvj01) So Don't Forgot To Give Credit
 
+💖 And Thank You So Much To All Who Help In This Journey 💕
+
 Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
 
 </b>
