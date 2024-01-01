@@ -109,3 +109,5 @@ Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
 
 ### Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
 
+<b>Selling This Repo Is Strictly Prohibited 🚫</b>
+
