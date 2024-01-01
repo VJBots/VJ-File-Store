@@ -105,3 +105,7 @@ Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
 
 </b>
 </details>
+
+<h1 align="center">
+  Copyright ©️ [Tech VJ](https://telegram.me/Kingvj01)
+</h1>
