@@ -71,11 +71,12 @@ async def on_clone(client, message):
 @Client.on_message(filters.command("deletecloned") & filters.private)
 async def delete_cloned_bot(client, message):
     try:
-        # Extract bot_token and bot_id from the message text using regex
-        bot_token = re.findall(r'\d{8,10}:[0-9A-Za-z_-]{35}', message.text)
+        bot_token = re.findall(r'\d[0-9]{8,10}:[0-9A-Za-z_-]{35}', message.text, re.IGNORECASE)
         bot_token = bot_token[0] if bot_token else None
-        bot_id = re.findall(r'\d{8,10}', message.text)
+        bot_id = re.findall(r'\d[0-9]{8,10}', message.text)
 
+        mongo_collection = mongo_db.bots
+        
         cloned_bot = mongo_collection.find_one({"token": bot_token})
         if cloned_bot:
             mongo_collection.delete_one({"token": bot_token})
