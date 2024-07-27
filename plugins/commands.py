@@ -14,6 +14,7 @@ from plugins.users_api import get_user, update_user_info
 from plugins.database import get_file_details
 from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import *
+from utils import verify_user, check_token, check_verification, get_token
 from config *
 import re
 import json
@@ -42,19 +43,12 @@ def get_size(size):
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
-# Ask Doubt on telegram @KingVJ01
-
-async def delete_after_delay(message: Message, delay):
-    await asyncio.sleep(AUTO_DELETE_TIME)
-    await message.delete()
-
-# Don't Remove Credit Tg - @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ0
 
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
+    username = (await client.get_me().username
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT.format(message.from_user.id, message.from_user.mention))
@@ -89,7 +83,39 @@ async def start(client, message):
     except:
         file_id = data
         pre = ""
-    if data.split("-", 1)[0] == "BATCH":
+    if data.split("-", 1)[0] == "verify":
+        userid = data.split("-", 2)[1]
+        token = data.split("-", 3)[2]
+        if str(message.from_user.id) != str(userid):
+            return await message.reply_text(
+                text="<b>Invalid link or Expired link !</b>",
+                protect_content=True
+            )
+        is_valid = await check_token(client, userid, token)
+        if is_valid == True:
+            await message.reply_text(
+                text=f"<b>Hey {message.from_user.mention}, You are successfully verified !\nNow you have unlimited access for all files till today midnight.</b>",
+                protect_content=True
+            )
+            await verify_user(client, userid, token)
+        else:
+            return await message.reply_text(
+                text="<b>Invalid link or Expired link !</b>",
+                protect_content=True
+            )
+    elif data.split("-", 1)[0] == "BATCH":
+        if not await check_verification(client, message.from_user.id) and VERIFY_MODE == True:
+            btn = [[
+                InlineKeyboardButton("Verify", url=await get_token(client, message.from_user.id, f"https://telegram.me/{username}?start="))
+            ],[
+                InlineKeyboardButton("How To Open Link & Verify", url=VERIFY_TUTORIAL)
+            ]]
+            await message.reply_text(
+                text="<b>You are not verified !\nKindly verify to continue !</b>",
+                protect_content=True,
+                reply_markup=InlineKeyboardMarkup(btn)
+            )
+            return
         sts = await message.reply("**🔺 ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ**")
         file_id = data.split("-", 1)[1]
         msgs = BATCH_FILES.get(file_id)
@@ -197,6 +223,18 @@ async def start(client, message):
     files_ = await get_file_details(file_id)           
     if not files_:
         pre, file_id = ((base64.urlsafe_b64decode(data + "=" * (-len(data) % 4))).decode("ascii")).split("_", 1)
+        if not await check_verification(client, message.from_user.id) and VERIFY_MODE == True:
+            btn = [[
+                InlineKeyboardButton("Verify", url=await get_token(client, message.from_user.id, f"https://telegram.me/{username}?start="))
+            ],[
+                InlineKeyboardButton("How To Open Link & Verify", url=VERIFY_TUTORIAL)
+            ]]
+            await message.reply_text(
+                text="<b>You are not verified !\nKindly verify to continue !</b>",
+                protect_content=True,
+                reply_markup=InlineKeyboardMarkup(btn)
+            )
+            return
         try:
             msg = await client.send_cached_media(
                 chat_id=message.from_user.id,
@@ -258,6 +296,18 @@ async def start(client, message):
             f_caption=f_caption
     if f_caption is None:
         f_caption = f"{files.file_name}"
+    if not await check_verification(client, message.from_user.id) and VERIFY_MODE == True:
+        btn = [[
+            InlineKeyboardButton("Verify", url=await get_token(client, message.from_user.id, f"https://telegram.me/{username}?start="))
+        ],[
+            InlineKeyboardButton("How To Open Link & Verify", url=VERIFY_TUTORIAL)
+        ]]
+        await message.reply_text(
+            text="<b>You are not verified !\nKindly verify to continue !</b>",
+            protect_content=True,
+            reply_markup=InlineKeyboardMarkup(btn)
+        )
+        return
     x = await client.send_cached_media(
         chat_id=message.from_user.id,
         file_id=file_id,
