@@ -10,6 +10,7 @@ validators
 requests
 bs4
 pytz
+shortzy
 python-dotenv==0.21.1
 Flask==1.1.2
 gunicorn==20.1.0
