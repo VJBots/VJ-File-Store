@@ -315,7 +315,7 @@ async def base_site_handler(client, m: Message):
     user_id = m.from_user.id
     user = await get_user(user_id)
     cmd = m.command
-    text = f"`/base_site (base_site)`\n\n<b>Current base site: None\n\n EX:</b> `/base_site shortnerdomain.com`"
+    text = f"`/base_site (base_site)`\n\n<b>Current base site: None\n\n EX:</b> `/base_site shortnerdomain.com`\n\nIf You Want To Remove Then Copy This And Send To Bot - `/base_site None`"
     if len(cmd) == 1:
         return await m.reply(text=text, disable_web_page_preview=True)
     elif len(cmd) == 2:
