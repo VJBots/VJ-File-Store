@@ -5,7 +5,7 @@
 import re
 from pyrogram import filters, Client, enums
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid, UsernameInvalid, UsernameNotModified
-from config import ADMINS, LOG_CHANNEL, FILE_STORE_CHANNEL, BOT_USERNAME
+from config import ADMINS, LOG_CHANNEL
 from plugins.database import unpack_new_file_id
 from plugins.users_api import get_user, get_short_link
 import re
@@ -27,6 +27,7 @@ logger.setLevel(logging.INFO)
 
 @Client.on_message(filters.command(['link', 'plink']))
 async def gen_link_s(bot, message):
+    username = (await bot.get_me()).username
     replied = message.reply_to_message
     if not replied:
         return await message.reply('Reply to a message to get a shareable link.')
@@ -46,7 +47,7 @@ async def gen_link_s(bot, message):
     outstr = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
     user_id = message.from_user.id
     user = await get_user(user_id)
-    share_link = f"https://t.me/{BOT_USERNAME}?start={outstr}"
+    share_link = f"https://t.me/{username}?start={outstr}"
     await message.reply(f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🔗 ᴏʀɪɢɪɴᴀʟ ʟɪɴᴋ :- {share_link}</b>")
     short_link = await get_short_link(user, share_link)
     await message.reply(f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🖇️ sʜᴏʀᴛ ʟɪɴᴋ :- {short_link}</b>")
@@ -57,6 +58,7 @@ async def gen_link_s(bot, message):
 
 @Client.on_message(filters.command(['batch', 'pbatch']))
 async def gen_link_batch(bot, message):
+    username = (await bot.get_me()).username
     if " " not in message.text:
         return await message.reply("Use correct format.\nExample /batch https://t.me/vj_botz/10 https://t.me/vj_botz/20.")
     links = message.text.strip().split(" ")
@@ -100,16 +102,6 @@ async def gen_link_batch(bot, message):
 # Ask Doubt on telegram @KingVJ01
     
     sts = await message.reply("**ɢᴇɴᴇʀᴀᴛɪɴɢ ʟɪɴᴋ ғᴏʀ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ**.\n**ᴛʜɪs ᴍᴀʏ ᴛᴀᴋᴇ ᴛɪᴍᴇ ᴅᴇᴘᴇɴᴅɪɴɢ ᴜᴘᴏɴ ɴᴜᴍʙᴇʀ ᴏғ ᴍᴇssᴀɢᴇs**")
-    if chat_id in FILE_STORE_CHANNEL:
-        string = f"{f_msg_id}_{l_msg_id}_{chat_id}_{cmd.lower().strip()}"
-        b_64 = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
-        user_id = message.from_user.id
-        user = await get_user(user_id)
-        share_link = f"https://t.me/{BOT_USERNAME}?start=DSTORE-{b_64}"
-        await sts.edit(f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🔗 ᴏʀɪɢɪɴᴀʟ ʟɪɴᴋ :- {share_link}</b>")
-        short_link = await get_short_link(user, share_link)
-        await message.reply(f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🖇️ sʜᴏʀᴛ ʟɪɴᴋ :- {short_link}</b>")
-        return
 
     FRMT = "**ɢᴇɴᴇʀᴀᴛɪɴɢ ʟɪɴᴋ...**\n**ᴛᴏᴛᴀʟ ᴍᴇssᴀɢᴇs:** {total}\n**ᴅᴏɴᴇ:** {current}\n**ʀᴇᴍᴀɪɴɪɴɢ:** {rem}\n**sᴛᴀᴛᴜs:** {sts}"
 
@@ -164,7 +156,7 @@ async def gen_link_batch(bot, message):
     file_id, ref = unpack_new_file_id(post.document.file_id)
     user_id = message.from_user.id
     user = await get_user(user_id)
-    share_link = f"https://t.me/{BOT_USERNAME}?start=BATCH-{file_id}"
+    share_link = f"https://t.me/{username}?start=BATCH-{file_id}"
     await sts.edit(f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\nContains `{og_msg}` files.\n🔗 ᴏʀɪɢɪɴᴀʟ ʟɪɴᴋ :- {share_link}</b>")
     short_link = await get_short_link(user, share_link)
     await message.reply(f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🖇️ sʜᴏʀᴛ ʟɪɴᴋ :- {short_link}</b>")
