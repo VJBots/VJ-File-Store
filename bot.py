@@ -34,7 +34,7 @@ logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
-from config import Var, LOG_CHANNEL
+from config import LOG_CHANNEL, ON_HEROKU, CLONE_MODE
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
 from Script import script 
@@ -86,7 +86,7 @@ async def start():
             spec.loader.exec_module(load)
             sys.modules["plugins." + plugin_name] = load
             print("Tech VJ Imported => " + plugin_name)
-    if Var.ON_HEROKU:
+    if ON_HEROKU:
         asyncio.create_task(ping_server())
     me = await StreamBot.get_me()
     tz = pytz.timezone('Asia/Kolkata')
@@ -98,7 +98,8 @@ async def start():
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, Var.PORT).start()
-    await restart_bots()
+    if CLONE_MODE == True:
+        await restart_bots()
     print("Bot Started Powered By @VJ_Botz")
     await idle()
 
