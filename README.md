@@ -12,10 +12,11 @@
 
 <b><details><summary>Tap On Me For Bot Features</summary>
  
+- [x] Permanent Link By Using Website [ Premium Feature] 
+- [x] Clone Feature Added [ Premium Feature] 
 - [x] Stram Feature Added With Many Player Support
 - [x] Custom Url Shortner Support Any User Can Add His Own Shortner
 - [x] Batch Support Added, Any User Can Use Batch By Making Bot Admin In His File Store Channel
-- [x] Clone Feature Added [ Premium Feature] 
 - [x] Auto Delete Feature Added
 - [x] Custom Start Message With Picture And Buttons
 </b>
