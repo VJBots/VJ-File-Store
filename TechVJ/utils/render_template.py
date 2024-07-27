@@ -1,5 +1,5 @@
 import jinja2
-from config import LOG_CHANNEL
+from config import LOG_CHANNEL, URL
 from TechVJ.bot import StreamBot
 from TechVJ.utils.human_readable import humanbytes
 from TechVJ.utils.file_properties import get_file_ids
@@ -18,7 +18,7 @@ async def render_page(id, secure_hash, src=None):
         raise InvalidHash
 
     src = urllib.parse.urljoin(
-        Var.URL,
+        URL,
         f"{id}/{urllib.parse.quote_plus(file_data.file_name)}?hash={secure_hash}",
     )
 
