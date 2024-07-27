@@ -5,11 +5,8 @@
 
 import re
 import os
-from os import getenv, environ
-from Script import script 
-from dotenv import load_dotenv
-
-load_dotenv()
+from os import environ
+from Script import script
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
@@ -74,29 +71,18 @@ PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 # Ask Doubt on telegram @KingVJ01
 
 # File Stream Config
-class Var(object):
-    MULTI_CLIENT = False
-    name = str(getenv('name', 'filetolinkvjbot'))
-    SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '60'))
-    WORKERS = int(getenv('WORKERS', '4'))
-    BIN_CHANNEL = int(getenv('BIN_CHANNEL', ''))
-    PORT = int(getenv('PORT', 8080))
-    BIND_ADRESS = str(getenv('WEB_SERVER_BIND_ADDRESS', '0.0.0.0'))
-    PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # 20 minutes
-    NO_PORT = bool(getenv('NO_PORT', False))
-    APP_NAME = None
-    if 'DYNO' in environ:
-        ON_HEROKU = True
-        APP_NAME = str(getenv('APP_NAME'))
-    
-    else:
-        ON_HEROKU = False
-    FQDN = str(getenv('FQDN', BIND_ADRESS)) if not ON_HEROKU or getenv('FQDN') else APP_NAME+'.herokuapp.com'
-    HAS_SSL=bool(getenv('HAS_SSL',False))
-    if HAS_SSL:
-        URL = ""
-    else:
-        URL = ""
+STREAM_MODE = bool(environ.get('STREAM_MODE', True)) # Set True or False
+
+# If Stream Mode Is True Then Fill All Required Variable, If False Then Don't Fill.
+MULTI_CLIENT = False
+SLEEP_THRESHOLD = int(environ.get('SLEEP_THRESHOLD', '60'))
+PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # 20 minutes
+if 'DYNO' in environ:
+    ON_HEROKU = True
+else:
+    ON_HEROKU = False
+URL = environ.get("URL", "https://testofvjfilter-1fa60b1b8498.herokuapp.com/")
+
 
 
 
