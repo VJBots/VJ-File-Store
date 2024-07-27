@@ -2,7 +2,7 @@
 
 import asyncio
 import logging
-from config import API_HASH, API_ID, Var
+from config import API_HASH, API_ID, MULTI_CLIENT, SLEEP_THRESHOLD
 from pyrogram import Client
 from TechVJ.utils.config_parser import TokenParser
 from . import multi_clients, work_loads, StreamBot
@@ -27,7 +27,7 @@ async def initialize_clients():
                 api_id=API_ID,
                 api_hash=API_HASH,
                 bot_token=token,
-                sleep_threshold=Var.SLEEP_THRESHOLD,
+                sleep_threshold=SLEEP_THRESHOLD,
                 no_updates=True,
                 in_memory=True
             ).start()
@@ -39,7 +39,7 @@ async def initialize_clients():
     clients = await asyncio.gather(*[start_client(i, token) for i, token in all_tokens.items()])
     multi_clients.update(dict(clients))
     if len(multi_clients) != 1:
-        Var.MULTI_CLIENT = True
+        MULTI_CLIENT = True
         print("Multi-Client Mode Enabled")
     else:
         print("No additional clients were initialized, using default client")
