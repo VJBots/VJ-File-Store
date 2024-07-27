@@ -12,7 +12,7 @@ from TechVJ import StartTime, __version__
 from ..utils.time_format import get_readable_time
 from ..utils.custom_dl import ByteStreamer
 from TechVJ.utils.render_template import render_page
-from config import Var
+from config import MULTI_CLIENT
 
 
 routes = web.RouteTableDef()
@@ -88,7 +88,7 @@ async def media_streamer(request: web.Request, id: int, secure_hash: str):
     index = min(work_loads, key=work_loads.get)
     faster_client = multi_clients[index]
     
-    if Var.MULTI_CLIENT:
+    if MULTI_CLIENT:
         logging.info(f"Client {index} is now serving {request.remote}")
 
     if faster_client in class_cache:
