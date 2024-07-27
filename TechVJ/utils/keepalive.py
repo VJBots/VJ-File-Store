@@ -2,11 +2,11 @@ import asyncio
 import logging
 import aiohttp
 import traceback
-from config import Var
+from config import PING_INTERVAL
 
 
 async def ping_server():
-    sleep_time = Var.PING_INTERVAL
+    sleep_time = PING_INTERVAL
     while True:
         await asyncio.sleep(sleep_time)
         try:
