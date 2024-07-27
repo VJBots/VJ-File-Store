@@ -97,7 +97,7 @@ async def start():
     await StreamBot.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
     await app.setup()
     bind_address = "0.0.0.0"
-    await web.TCPSite(app, bind_address, Var.PORT).start()
+    await web.TCPSite(app, bind_address, PORT).start()
     if CLONE_MODE == True:
         await restart_bots()
     print("Bot Started Powered By @VJ_Botz")
