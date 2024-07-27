@@ -14,6 +14,7 @@
  
 - [x] Permanent Link By Using Website [ Premium Feature] 
 - [x] Clone Feature Added [ Premium Feature] 
+- [x] Token Verification Feature 
 - [x] Stram Feature Added With Many Player Support
 - [x] Custom Url Shortner Support Any User Can Add His Own Shortner
 - [x] Batch Support Added, Any User Can Use Batch By Making Bot Admin In His File Store Channel
