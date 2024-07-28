@@ -18,7 +18,7 @@ API_HASH = environ.get("API_HASH", "2a99a1375e26295626c04b4606f72752")
 BOT_TOKEN = environ.get("BOT_TOKEN", "6805479142:AAG_tNhfZVD2ROERlyoLAM4hpkvFJgdmpkY")
 
 PICS = (environ.get('PICS', 'https://graph.org/file/abb6631a3363a2af2544f.jpg')).split() # Bot Start Picture
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '').split()]
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '1740287480').split()]
 BOT_USERNAME = environ.get("BOT_USERNAME", "FileStoreRooBot") # without @
 PORT = environ.get("PORT", "8080")
 
@@ -75,7 +75,7 @@ if 'DYNO' in environ:
     ON_HEROKU = True
 else:
     ON_HEROKU = False
-URL = environ.get("URL", "")
+URL = environ.get("URL", "https://file-store-fw2r.onrender.com")
 
 
 # Don't Remove Credit Tg - @VJ_Botz
