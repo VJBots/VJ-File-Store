@@ -118,7 +118,7 @@ async def start(client, message):
                 )
                 return
         except Exception as e:
-            await message.reply_text(f"**Error - {e}**")
+            return await message.reply_text(f"**Error - {e}**")
         sts = await message.reply("**🔺 ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ**")
         file_id = data.split("-", 1)[1]
         msgs = BATCH_FILES.get(file_id)
