@@ -1,15 +1,32 @@
-import pytz, random, string, json  
-from datetime import date 
+import logging, asyncio, os, re, random, pytz, aiohttp, requests, string, json, http.client
+from datetime import date, datetime
 from config import SHORTLINK_API, SHORTLINK_URL
 from shortzy import Shortzy
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 TOKENS = {}
 VERIFIED = {}
 
 async def get_verify_shorted_link(link):
-    shortzy = Shortzy(api_key=SHORTLINK_API, base_site=SHORTLINK_URL)
-    link = await shortzy.convert(link)
-    return link
+    if SHORTLINK_URL == "api.shareus.io":
+        url = f'https://{SHORTLINK_URL}/easy_api'
+        params = {
+            "key": SHORTLINK_API,
+            "link": link,
+        }
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
+                    data = await response.text()
+                    return data
+        except Exception as e:
+            logger.error(e)
+            return link
+    else:
+        shortzy = Shortzy(api_key=SHORTLINK_API, base_site=SHORTLINK_URL)
+        link = await shortzy.convert(link)
+        return link
 
 async def check_token(bot, userid, token):
     user = await bot.get_users(userid)
