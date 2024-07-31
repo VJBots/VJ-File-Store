@@ -24,9 +24,13 @@ async def get_verify_shorted_link(link):
             logger.error(e)
             return link
     else:
-        shortzy = Shortzy(api_key=SHORTLINK_API, base_site=SHORTLINK_URL)
-        link = await shortzy.convert(link)
-        return link
+        response = requests.get(f"https://{SHORTLINK_URL}/api?api={SHORTLINK_API}&url={link}")
+        data = response.json()
+        if data["status"] == "success" or rget.status_code == 200:
+            return data["shortenedUrl"]
+        #shortzy = Shortzy(api_key=SHORTLINK_API, base_site=SHORTLINK_URL)
+       # link = await shortzy.convert(link)
+        #return link
 
 async def check_token(bot, userid, token):
     user = await bot.get_users(userid)
