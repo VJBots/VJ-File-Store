@@ -74,6 +74,8 @@ If You Want To Remove Api Then Copy This And Send To Bot - `/api None`"""
 # Ask Doubt on telegram @KingVJ01
 
     CLONE_TXT = """<b>ʜᴇʟʟᴏ {} 👋
+
+First Send /clone command then follow below steps.
     
 1) sᴇɴᴅ <code>/newbot</code> ᴛᴏ @BotFather
 2) ɢɪᴠᴇ ᴀ ɴᴀᴍᴇ ꜰᴏʀ ʏᴏᴜʀ ʙᴏᴛ.
