@@ -14,8 +14,8 @@ from plugins.users_api import get_user, update_user_info
 from plugins.database import get_file_details
 from pyrogram.errors import *
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from utils import AUTH_CHANNEL, verify_user, check_token, check_verification, get_token
-from config import *
+from utils import verify_user, check_token, check_verification, get_token
+from config import AUTH_CHANNEL
 import re
 import json
 import base64
@@ -62,7 +62,7 @@ def get_size(size):
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     username = (await client.get_me()).username
-     if AUTH_CHANNEL:
+    if AUTH_CHANNEL:
         try:
             btn = await is_subscribed(client, message, AUTH_CHANNEL)
             if btn:
