@@ -20,11 +20,11 @@ def is_enabled(value, default):
 # Bot Information
 API_ID = int(environ.get("API_ID", "10685201"))
 API_HASH = environ.get("API_HASH", "8e039b83a886a2c2b97309ccc6298c20")
-BOT_TOKEN = environ.get("BOT_TOKEN", "6051208984:AAFDYyRGVXFcweA4dw9BrONfKAwGFb0F_JY")
+BOT_TOKEN = environ.get("BOT_TOKEN", "7537295001:AAHeCejJ0-7t62V_o6vjWwTDvT89ccymzVg")
 
 PICS = (environ.get('PICS', 'https://graph.org/file/ce1723991756e48c35aa1.jpg')).split() # Bot Start Picture
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '').split()]
-BOT_USERNAME = environ.get("BOT_USERNAME", "Wanda_Files_3000_Bot") # without @
+BOT_USERNAME = environ.get("BOT_USERNAME", "WandaCloneManagerBot") # without @
 PORT = environ.get("PORT", "8080")
 
 # Clone Info :-
