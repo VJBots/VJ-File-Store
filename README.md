@@ -37,7 +37,6 @@
 - `CDB_URI` : Mongodb Database Url For Clone Bot [Tutorial Watch Here](https://youtu.be/DAHRmFdw99o)
 - `ADMINS` : It mean Admin/Owner Id For Broadcasting Message.
 - `LOG_CHANNEL` : Log channel id start with -100xxxxxx
-- `BIN_CHANNEL` : Bin channel id start with -100xxxxxx
 - `FILE_STORE_CHANNEL` : File Store Channel id start with -100xxxxxx
 - `URL` : Your Server App Link With https:// and in last make sure one / is given.
 - `AUTO_DELETE` : Time In Minutes
