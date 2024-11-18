@@ -34,10 +34,9 @@
 - `BOT_TOKEN` : Get From [BotFather](https://telegram.me/BotFather)
 - `BOT_USERNAME` : Your Bot Username Without @
 - `DB_URI` : Mongodb Database Url For Main Bot [Tutorial Watch Here](https://youtu.be/DAHRmFdw99o)
-- `CDB_URI` : Mongodb Database Url For Clone Bot [Tutorial Watch Here](https://youtu.be/DAHRmFdw99o)
+- `CLONE_DB_URI` : Mongodb Database Url For Clone Bot [Tutorial Watch Here](https://youtu.be/DAHRmFdw99o)
 - `ADMINS` : It mean Admin/Owner Id For Broadcasting Message.
 - `LOG_CHANNEL` : Log channel id start with -100xxxxxx
-- `FILE_STORE_CHANNEL` : File Store Channel id start with -100xxxxxx
 - `URL` : Your Server App Link With https:// and in last make sure one / is given.
 - `AUTO_DELETE` : Time In Minutes
 - `AUTO_DELETE_TIME` : Time In Seconds
