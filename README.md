@@ -39,7 +39,7 @@
 - `LOG_CHANNEL` : Log channel id start with -100xxxxxx
 - `BIN_CHANNEL` : Bin channel id start with -100xxxxxx
 - `FILE_STORE_CHANNEL` : File Store Channel id start with -100xxxxxx
-- `FQDN` : Your Server App Link Without https://
+- `URL` : Your Server App Link With https:// and in last make sure one / is given.
 - `AUTO_DELETE` : Time In Minutes
 - `AUTO_DELETE_TIME` : Time In Seconds
 - `PYTHON_VERSION` : This Variable Is Only For Render, Value IS `3.10.8`
