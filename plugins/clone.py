@@ -3,7 +3,6 @@
 # Ask Doubt on telegram @KingVJ01
 
 import re
-import logging
 from pymongo import MongoClient
 from Script import script
 from pyrogram import Client, filters
@@ -76,7 +75,6 @@ async def delete_cloned_bot(client, message):
 # Ask Doubt on telegram @KingVJ01
 
 async def restart_bots():
-    logging.info("Restarting all bots........")
     bots = list(mongo_db.bots.find())
     for bot in bots:
         bot_token = bot['token']
@@ -87,6 +85,5 @@ async def restart_bots():
                 plugins={"root": "clone_plugins"},
             )
             await vj.start()
-        except Exception as e:
-            logging.exception(f"Error while restarting bot with token {bot_token}: {e}")
-
+        except:
+            pass
