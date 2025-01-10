@@ -185,9 +185,11 @@ async def gen_link_batch(bot, message):
                 pass
     with open(f"batchmode_{message.from_user.id}.json", "w+") as out:
         json.dump(outlist, out)
-    post = await bot.send_document(LOG_CHANNEL, f"batchmode_{message.from_user.id}.json", file_name="Batch.json", caption="⚠️Generated for filestore.")
+    post = await bot.send_document(LOG_CHANNEL, f"batchmode_{message.from_user.id}.json", file_name="Batch.json", caption="⚠️ Batch Generated For Filestore.")
     os.remove(f"batchmode_{message.from_user.id}.json")
-    file_id, ref = unpack_new_file_id(post.document.file_id)
+    string = post.id
+    file_id = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
+    #file_id, ref = unpack_new_file_id(post.document.file_id)
     user_id = message.from_user.id
     user = await get_user(user_id)
     if WEBSITE_URL_MODE == True:
