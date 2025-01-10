@@ -11,14 +11,10 @@ import re
 import os
 import json
 import base64
-import logging
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 async def allowed(_, __, message):
     if PUBLIC_FILE_STORE:
