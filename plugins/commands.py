@@ -157,7 +157,16 @@ async def start(client, message):
                 if f_caption is None:
                     f_caption = f"{title}"
                 if STREAM_MODE == True:
-                    button = [[InlineKeyboardButton('🚀 Fast Download / Watch Online🖥️', callback_data=f'generate_stream_link:{file_id}')]]
+                    log_msg = info
+                    fileName = {quote_plus(get_name(log_msg))}
+                    stream = f"{URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
+                    download = f"{URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
+                    button = [[
+                        InlineKeyboardButton("🚀 Fast Download 🚀", url=download),
+                        InlineKeyboardButton('🖥️ Watch online 🖥️', url=stream)
+                    ],[
+                        InlineKeyboardButton("• ᴡᴀᴛᴄʜ ɪɴ ᴡᴇʙ ᴀᴘᴘ •", web_app=WebAppInfo(url=stream))
+                    ]]
                     reply_markup=InlineKeyboardMarkup(button)
                 else:
                     reply_markup = None
