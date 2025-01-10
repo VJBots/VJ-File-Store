@@ -6,7 +6,6 @@ import re
 from pyrogram import filters, Client, enums
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid, UsernameInvalid, UsernameNotModified
 from config import ADMINS, LOG_CHANNEL, PUBLIC_FILE_STORE, WEBSITE_URL, WEBSITE_URL_MODE
-from plugins.database import unpack_new_file_id
 from plugins.users_api import get_user, get_short_link
 import re
 import os
@@ -36,7 +35,6 @@ async def allowed(_, __, message):
 async def incoming_gen_link(bot, message):
     username = (await bot.get_me()).username
     file_type = message.media
-  #  file_id, ref = unpack_new_file_id((getattr(message, file_type.value)).file_id)
     post = await message.copy(LOG_CHANNEL)
     file_id = str(post.id)
     string = 'file_'
@@ -71,7 +69,6 @@ async def gen_link_s(bot, message):
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
-   # file_id, ref = unpack_new_file_id((getattr(replied, file_type.value)).file_id)
     post = await replied.copy(LOG_CHANNEL)
     file_id = str(post.id)
     string = 'file_'
@@ -178,7 +175,6 @@ async def gen_link_batch(bot, message):
     os.remove(f"batchmode_{message.from_user.id}.json")
     string = str(post.id)
     file_id = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
-   # file_id, ref = unpack_new_file_id(post.document.file_id)
     user_id = message.from_user.id
     user = await get_user(user_id)
     if WEBSITE_URL_MODE == True:
