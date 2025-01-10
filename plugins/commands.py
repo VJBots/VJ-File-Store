@@ -121,7 +121,7 @@ async def start(client, message):
         file_id = data.split("-", 1)[1]
         msgs = BATCH_FILES.get(file_id)
         if not msgs:
-            decode_file_id = base64.urlsafe_b64decode(data + "=" * (-len(data) % 4)).decode("ascii")
+            decode_file_id = base64.urlsafe_b64decode(file_id + "=" * (-len(file_id) % 4)).decode("ascii")
             msg = await client.get_messages(LOG_CHANNEL, int(decode_file_id))
             media = getattr(msg, msg.media.value)
             file_id = media.file_id
@@ -139,7 +139,7 @@ async def start(client, message):
         for msg in msgs:
             channel_id = int(msg.get("channel_id"))
             msgid = msg.get("msg_id")
-            info = await client.get_messages(LOG_CHANNEL, int(msgid))
+            info = await client.get_messages(channel_id, int(msgid))
             if info.media:
                 file_type = info.media
                 file = getattr(info, file_type.value)
@@ -148,7 +148,7 @@ async def start(client, message):
                     f_caption = f_caption.html
                 title = getattr(file, "file_name", "")
                 size=get_size(int(file.file_size))
-                file_id = file.file_id
+                file_id = str(file.file_id)
                 if BATCH_FILE_CAPTION:
                     try:
                         f_caption=BATCH_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='' if f_caption is None else f_caption)
@@ -219,7 +219,7 @@ async def start(client, message):
                     f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
                 except:
                     return
-            file_id = media.file_id
+            file_id = str(media.file_id)
             if STREAM_MODE == True:
                 reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton('🚀 Fast Download / Watch Online🖥️', callback_data=f'generate_stream_link:{file_id}')]])
             else:
