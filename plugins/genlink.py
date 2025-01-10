@@ -152,32 +152,17 @@ async def gen_link_batch(bot, message):
         tot += 1
         if msg.empty or msg.service:
             continue
-        if not msg.media:
-            # only media messages supported.
-            continue
-        try:
-            file_type = msg.media
-            file = getattr(msg, file_type.value)
-            caption = getattr(msg, 'caption', '')
-            if caption:
-                caption = caption.html
-            if file:
-                file = {
-                    "file_id": file.file_id,
-                    "caption": caption,
-                    "title": getattr(file, "file_name", ""),
-                    "size": file.file_size,
-                    "protect": cmd.lower().strip() == "/pbatch",
-                }
+        file = {
+            "channel_id": f_chat_id,
+            "msg_id": msg.id
+        }
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
-                og_msg +=1
-                outlist.append(file)
-        except:
-            pass
+        og_msg +=1
+        outlist.append(file)
         if not og_msg % 20:
             try:
                 await sts.edit(FRMT.format(total=l_msg_id-f_msg_id, current=tot, rem=((l_msg_id-f_msg_id) - tot), sts="Saving Messages"))
@@ -187,9 +172,9 @@ async def gen_link_batch(bot, message):
         json.dump(outlist, out)
     post = await bot.send_document(LOG_CHANNEL, f"batchmode_{message.from_user.id}.json", file_name="Batch.json", caption="⚠️ Batch Generated For Filestore.")
     os.remove(f"batchmode_{message.from_user.id}.json")
-   # string = post.id
-   # file_id = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
-    file_id, ref = unpack_new_file_id(post.document.file_id)
+    string = post.id
+    file_id = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
+   # file_id, ref = unpack_new_file_id(post.document.file_id)
     user_id = message.from_user.id
     user = await get_user(user_id)
     if WEBSITE_URL_MODE == True:
