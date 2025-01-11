@@ -8,7 +8,7 @@ import random
 import asyncio
 from Script import script
 from validators import domain
-from clone_plugins.dbusers import db
+from clone_plugins.dbusers import clonedb
 from clone_plugins.users_api import get_user, update_user_info
 from pyrogram import Client, filters, enums
 from plugins.clone import mongo_db
@@ -43,22 +43,22 @@ def get_size(size):
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
-    if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id, message.from_user.first_name)
+    me = await client.get_me()
+    if not await clonedb.is_user_exist(me.id, message.from_user.id):
+        await clonedb.add_user(me.id, message.from_user.id)
     if len(message.command) != 2:
         buttons = [[
             InlineKeyboardButton('💝 sᴜʙsᴄʀɪʙᴇ ᴍʏ ʏᴏᴜᴛᴜʙᴇ ᴄʜᴀɴɴᴇʟ', url='https://youtube.com/@Tech_VJ')
-            ],[
+        ],[
             InlineKeyboardButton('🤖 ᴄʀᴇᴀᴛᴇ ʏᴏᴜʀ ᴏᴡɴ ᴄʟᴏɴᴇ ʙᴏᴛ', url=f'https://t.me/{BOT_USERNAME}?start=clone')
-            ],[
+        ],[
             InlineKeyboardButton('💁‍♀️ ʜᴇʟᴘ', callback_data='help'),
             InlineKeyboardButton('ᴀʙᴏᴜᴛ 🔻', callback_data='about')
         ]]
-        me2 = (await client.get_me()).mention
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
             photo=random.choice(PICS),
-            caption=script.CLONE_START_TXT.format(message.from_user.mention, me2),
+            caption=script.CLONE_START_TXT.format(message.from_user.mention, me.mention),
             reply_markup=reply_markup
         )
         return
