@@ -11,7 +11,7 @@ from validators import domain
 from clone_plugins.dbusers import db
 from clone_plugins.users_api import get_user, update_user_info
 from pyrogram import Client, filters, enums
-from plugins.database import get_file_details
+from plugins.clone import mongo_db
 from pyrogram.errors import ChatAdminRequired, FloodWait
 from config import BOT_USERNAME, ADMINS
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, InputMediaPhoto
@@ -19,11 +19,6 @@ from config import PICS, CUSTOM_FILE_CAPTION, AUTO_DELETE_TIME, AUTO_DELETE
 import re
 import json
 import base64
-from config import DB_URI as MONGO_URL
-from pymongo import MongoClient
-
-mongo_client = MongoClient(MONGO_URL)
-mongo_db = mongo_client["cloned_vjbotz"]
 
 logger = logging.getLogger(__name__)
 
@@ -79,53 +74,32 @@ async def start(client, message):
         file_id = data
         pre = ""   
 
-    files_ = await get_file_details(file_id)           
-    if not files_:
-        pre, file_id = ((base64.urlsafe_b64decode(data + "=" * (-len(data) % 4))).decode("ascii")).split("_", 1)
-        try:
-            msg = await client.send_cached_media(
-                chat_id=message.from_user.id,
-                file_id=file_id,
-                protect_content=True if pre == 'filep' else False,
-                )
-            filetype = msg.media
-            file = getattr(msg, filetype.value)
-            title = '@VJ_Botz  ' + ' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), file.file_name.split()))
-            size=get_size(file.file_size)
-            f_caption = f"<code>{title}</code>"
-            if CUSTOM_FILE_CAPTION:
-                try:
-                    f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
-                except:
-                    return
-            await msg.edit_caption(f_caption)
-            k = await msg.reply(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File/Video will be deleted in <b><u>{AUTO_DELETE} mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this File/Video to your Saved Messages and Start Download there</i></b>",quote=True)
-            await asyncio.sleep(AUTO_DELETE_TIME)
-            await msg.delete()
-            await k.edit_text("<b>Your File/Video is successfully deleted!!!</b>")
-            return
-        except:
-            pass
-        return await message.reply('No such file exist.')
-    files = files_[0]
-    title = files.file_name
-    size=get_size(files.file_size)
-    f_caption=files.caption
-    if CUSTOM_FILE_CAPTION:
-        try:
-            f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='' if f_caption is None else f_caption)
-        except Exception as e:
-            logger.exception(e)
-            f_caption=f_caption
-    if f_caption is None:
-        f_caption = f"{files.file_name}"
-    await client.send_cached_media(
-        chat_id=message.from_user.id,
-        file_id=file_id,
-        caption=f_caption,
-        protect_content=True if pre == 'filep' else False,
+    pre, file_id = ((base64.urlsafe_b64decode(data + "=" * (-len(data) % 4))).decode("ascii")).split("_", 1)
+    try:
+        msg = await client.send_cached_media(
+            chat_id=message.from_user.id,
+            file_id=file_id,
+            protect_content=True if pre == 'filep' else False,
         )
-
+        filetype = msg.media
+        file = getattr(msg, filetype.value)
+        title = '@VJ_Botz  ' + ' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), file.file_name.split()))
+        size=get_size(file.file_size)
+        f_caption = f"<code>{title}</code>"
+        if CUSTOM_FILE_CAPTION:
+            try:
+                f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
+            except:
+                return
+        await msg.edit_caption(f_caption)
+        k = await msg.reply(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File/Video will be deleted in <b><u>{AUTO_DELETE} mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this File/Video to your Saved Messages and Start Download there</i></b>",quote=True)
+        await asyncio.sleep(AUTO_DELETE_TIME)
+        await msg.delete()
+        await k.edit_text("<b>Your File/Video is successfully deleted!!!</b>")
+        return
+    except:
+        pass
+        
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
@@ -176,6 +150,7 @@ async def base_site_handler(client, m: Message):
 
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
+    me = await client.get_me()
     if query.data == "close_data":
         await query.message.delete()
     elif query.data == "start":
@@ -194,9 +169,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             query.message.id, 
             InputMediaPhoto(random.choice(PICS))
         )
-        me2 = (await client.get_me()).mention
         await query.message.edit_text(
-            text=script.CLONE_START_TXT.format(query.from_user.mention, me2),
+            text=script.CLONE_START_TXT.format(query.from_user.mention, me.mention),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
@@ -232,13 +206,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
             query.message.id, 
             InputMediaPhoto(random.choice(PICS))
         )
-        me2 = (await client.get_me()).mention
-        id = client.me.id
-        owner = mongo_db.bots.find_one({'bot_id': id})
+        owner = mongo_db.bots.find_one({'bot_id': me.id})
         ownerid = int(owner['user_id'])
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
-            text=script.CABOUT_TXT.format(me2, ownerid),
+            text=script.CABOUT_TXT.format(me.mention, ownerid),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )  
