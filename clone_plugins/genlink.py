@@ -4,7 +4,6 @@
 
 import re
 from pyrogram import filters, Client, enums
-from plugins.database import unpack_new_file_id
 from clone_plugins.users_api import get_user, get_short_link
 import base64
 
@@ -12,7 +11,7 @@ import base64
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
-@Client.on_message(filters.command(['link', 'plink']))
+@Client.on_message(filters.command(['link']))
 async def gen_link_s(client: Client, message):
     replied = message.reply_to_message
     if not replied:
@@ -20,15 +19,13 @@ async def gen_link_s(client: Client, message):
     file_type = replied.media
     if file_type not in [enums.MessageMediaType.VIDEO, enums.MessageMediaType.AUDIO, enums.MessageMediaType.DOCUMENT]:
         return await message.reply("Reply to a supported media")
-    if message.has_protected_content:
-        return await message.reply("okDa")
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
-    file_id, ref = unpack_new_file_id((getattr(replied, file_type.value)).file_id)
-    string = 'filep_' if message.text.lower().strip() == "/plink" else 'file_'
+    file_id = getattr(replied, file_type.value).file_id
+    string = 'file_'
     string += file_id
     outstr = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
     user_id = message.from_user.id
