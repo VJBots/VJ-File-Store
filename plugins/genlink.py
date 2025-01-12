@@ -31,8 +31,8 @@ async def allowed(_, __, message):
 async def incoming_gen_link(bot, message):
     username = (await bot.get_me()).username
     file_type = message.media
-    post = await message.copy(LOG_CHANNEL)
-    file_id = str(post.id)
+  #  post = await message.copy(LOG_CHANNEL)
+    file_id = str(message.id)
     string = 'file_'
     string += file_id
     outstr = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
@@ -59,8 +59,8 @@ async def gen_link_s(bot, message):
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
-    post = await replied.copy(LOG_CHANNEL)
-    file_id = str(post.id)
+  #  post = await replied.copy(LOG_CHANNEL)
+    file_id = str(replied.id)
     string = 'file_'
     string += file_id
     outstr = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
