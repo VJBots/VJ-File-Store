@@ -60,7 +60,7 @@ async def gen_link_s(bot, message):
 # Ask Doubt on telegram @KingVJ01
     
     #post = await replied.copy(LOG_CHANNEL)
-    post = await client.copy_message("me", message.chat.id, replied.id)
+    post = await bot.copy_message("me", message.chat.id, replied.id)
     file_id = str(post.id)
     string = f"file_"
     string += file_id
