@@ -59,8 +59,7 @@ async def gen_link_s(bot, message):
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
-    #post = await replied.copy(LOG_CHANNEL)
-    post = await bot.copy_message("me", message.chat.id, replied.id)
+    post = await replied.copy(LOG_CHANNEL)
     file_id = str(post.id)
     string = f"file_"
     string += file_id
