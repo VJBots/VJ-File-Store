@@ -59,9 +59,9 @@ async def gen_link_s(bot, message):
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
-  #  post = await replied.copy(LOG_CHANNEL)
-    file_id = str(replied.id)
-    string = f'{str(message.from_user.id)}_'
+    post = await replied.copy("me")
+    file_id = str(post.id)
+    string = f"file_"
     string += file_id
     outstr = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
     user_id = message.from_user.id
