@@ -1,10 +1,7 @@
-from pyrogram import Client
+from pyrogram import Client, types
 from config import *
 from typing import Union, Optional, AsyncGenerator
-from pyrogram import types
 from aiohttp import web
-
-from pyrogram import Client
 
 class StreamXBot(Client):
 
