@@ -225,7 +225,7 @@ async def start(client, message):
         )
         return
     try:
-        msg = await client.get_messages("me", int(decode_file_id))
+        msg = await client.get_messages(int(pre), int(decode_file_id))
         if msg.media:
             media = getattr(msg, msg.media.value)
             title = formate_file_name(media.file_name)
