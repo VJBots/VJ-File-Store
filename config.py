@@ -31,12 +31,10 @@ PORT = environ.get("PORT", "8080")
 CLONE_MODE = bool(environ.get('CLONE_MODE', True)) # Set True or False
 
 # If Clone Mode Is True Then Fill All Required Variable, If False Then Don't Fill.
-CLONE_DB_URI = environ.get("CLONE_DB_URI", "mongodb+srv://airslowedreverb:Akgs@6279@cluster0.rnoxprd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-CDB_NAME = environ.get("CDB_NAME", "Cluster0")
+CLONE_DB_URI = environ.get("CLONE_DB_URI", "")
 
 # Database Information
-DB_URI = environ.get("DB_URI", "mongodb+srv://airslowedreverb:Akgs@cluster0.sqr2vwm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DB_NAME = environ.get("DB_NAME", "Cluster0")
+DB_URI = environ.get("DB_URI", " ")
 
 # Auto Delete Information
 AUTO_DELETE_MODE = bool(environ.get('AUTO_DELETE_MODE', True)) # Set True or False
