@@ -1,3 +1,8 @@
+# Don't Remove Credit @VJ_Bots
+# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
+# Ask Doubt on telegram @KingVJ01
+
+
 from pyrogram import Client
 from typing import Any, Optional
 from pyrogram.types import Message
