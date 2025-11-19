@@ -1,3 +1,7 @@
+# Don't Remove Credit @VJ_Bots
+# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
+# Ask Doubt on telegram @KingVJ01
+
 import logging, asyncio, os, re, random, pytz, aiohttp, requests, string, json, http.client
 from datetime import date, datetime
 from config import SHORTLINK_API, SHORTLINK_URL
