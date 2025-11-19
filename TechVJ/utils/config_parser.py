@@ -1,3 +1,7 @@
+# Don't Remove Credit @VJ_Bots
+# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
+# Ask Doubt on telegram @KingVJ01
+
 from os import environ
 from typing import Dict, Optional
 
