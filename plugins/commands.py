@@ -1,4 +1,4 @@
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
@@ -47,7 +47,7 @@ def formate_file_name(file_name):
     file_name = '@VJ_Botz ' + ' '.join(filter(lambda x: not x.startswith('http') and not x.startswith('@') and not x.startswith('www.'), file_name.split()))
     return file_name
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ0
 
@@ -79,7 +79,7 @@ async def start(client, message):
         )
         return
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
@@ -153,7 +153,7 @@ async def start(client, message):
                 file = getattr(info, file_type.value)
                 f_caption = getattr(info, 'caption', '')
                 if f_caption:
-                    f_caption = f_caption.html
+                    f_caption = f"@VJ_Bots {f_caption.html}"
                 old_title = getattr(file, "file_name", "")
                 title = formate_file_name(old_title)
                 size=get_size(int(file.file_size))
@@ -163,7 +163,7 @@ async def start(client, message):
                     except:
                         f_caption=f_caption
                 if f_caption is None:
-                    f_caption = f"{title}"
+                    f_caption = f"@VJ_Bots {title}"
                 if STREAM_MODE == True:
                     if info.video or info.document:
                         log_msg = info
@@ -208,7 +208,7 @@ async def start(client, message):
             await k.edit_text("<b>Your All Files/Videos is successfully deleted!!!</b>")
         return
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
@@ -231,7 +231,7 @@ async def start(client, message):
             media = getattr(msg, msg.media.value)
             title = formate_file_name(media.file_name)
             size=get_size(media.file_size)
-            f_caption = f"<code>{title}</code>"
+            f_caption = f"@VJ_Bots <code>{title}</code>"
             if CUSTOM_FILE_CAPTION:
                 try:
                     f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
@@ -267,7 +267,7 @@ async def start(client, message):
     except:
         pass
         
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
@@ -286,7 +286,7 @@ async def shortener_api_handler(client, m: Message):
         await update_user_info(user_id, {"shortener_api": api})
         await m.reply("<b>Shortener API updated successfully to</b> " + api)
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
@@ -309,7 +309,7 @@ async def base_site_handler(client, m: Message):
         await update_user_info(user_id, {"base_site": base_site})
         await m.reply("<b>Base Site updated successfully</b>")
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
 
@@ -335,7 +335,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
@@ -364,7 +364,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
@@ -385,7 +385,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )          
 
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
@@ -406,6 +406,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )  
         
-# Don't Remove Credit Tg - @VJ_Botz
+# Don't Remove Credit Tg - @VJ_Bots
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
