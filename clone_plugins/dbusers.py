@@ -1,3 +1,8 @@
+# Don't Remove Credit @VJ_Bots
+# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
+# Ask Doubt on telegram @KingVJ01
+
+
 import motor.motor_asyncio
 from config import CDB_NAME, CLONE_DB_URI
 
